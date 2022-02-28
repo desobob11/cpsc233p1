@@ -23,6 +23,12 @@
 //imports
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.Collections;
+
+import javax.swing.plaf.synth.SynthSpinnerUI;
+
 import java.util.Arrays;
 
 
@@ -258,6 +264,117 @@ public class App {
 		}
 		
 	}
+
+
+	public static void top_scorers(int number_of) {
+		System.out.println(String.format("Top %d scorers:\n-----------------------------------\n", number_of));
+			ArrayList<Integer> all_counts = new ArrayList<Integer>();
+			ArrayList<Integer> top_counts = new ArrayList<Integer>();
+
+
+			for (Map.Entry<String, String> set : goals.entrySet()) {
+				all_counts.add(Integer.parseInt(set.getValue()));
+			}
+
+			Collections.sort(all_counts);
+			Collections.reverse(all_counts);
+
+			if (all_counts.size() < number_of) {
+				for (int count : all_counts) {
+					top_counts.add(count);
+				}
+			}
+			
+			else {
+				for (int i = 0; i < number_of; ++i) {
+					top_counts.add(all_counts.get(all_counts.size() - 1 - i));
+				}	
+			}
+
+			for (int count : top_counts) {
+				for (Map.Entry<String, String> key : goals.entrySet()) {
+					if (Integer.parseInt(goals.get(key.getKey())) == count) {
+						player_summary(key.getKey());
+					}
+				}
+			}
+	}
+
+public static void top_assisters(int number_of) {
+	System.out.println(String.format("Top %d Assisters:\n-----------------------------------\n", number_of));
+		ArrayList<Integer> all_counts = new ArrayList<Integer>();
+		ArrayList<Integer> top_counts = new ArrayList<Integer>();
+
+
+		for (Map.Entry<String, String> set : assists.entrySet()) {
+			all_counts.add(Integer.parseInt(set.getValue()));
+		}
+
+		Collections.sort(all_counts);
+		Collections.reverse(all_counts);
+
+		if (all_counts.size() < number_of) {
+			for (int count : all_counts) {
+				top_counts.add(count);
+			}
+		}
+		
+		else {
+			for (int i = 0; i < number_of; ++i) {
+				top_counts.add(all_counts.get(all_counts.size() - 1 - i));
+			}	
+		}
+
+		for (int count : top_counts) {
+			for (Map.Entry<String, String> key : assists.entrySet()) {
+				if (Integer.parseInt(assists.get(key.getKey())) == count) {
+					player_summary(key.getKey());
+				}
+			}
+		}
+	}
+
+
+public static void top_goalis(int number_of) {
+	System.out.println(String.format("Top %d Goalies:\n-----------------------------------\n", number_of));
+		ArrayList<Integer> all_counts = new ArrayList<Integer>();
+		ArrayList<Integer> top_counts = new ArrayList<Integer>();
+
+
+		for (Map.Entry<String, String> set : saves.entrySet()) {
+			all_counts.add(Integer.parseInt(set.getValue()));
+		}
+
+		Collections.sort(all_counts);
+		Collections.reverse(all_counts);
+
+		if (all_counts.size() < number_of) {
+			for (int count : all_counts) {
+				top_counts.add(count);
+			}
+		}
+		
+		else {
+			for (int i = 0; i < number_of; ++i) {
+				top_counts.add(all_counts.get(all_counts.size() - 1 - i));
+			}	
+		}
+
+		for (int count : top_counts) {
+			for (Map.Entry<String, String> key : saves.entrySet()) {
+				if (Integer.parseInt(saves.get(key.getKey())) == count) {
+					player_summary(key.getKey());
+				}
+			}
+		}
+	}
+
+
+
+
+
+
+
 	
 	
 	
@@ -294,21 +411,28 @@ public class App {
 		
 		add_team("Man City");
 		add_team("Man United");
-		add_player("Man United", "Messi", "40", "Argentina", "Striker", "69");
-		add_player("Man United", "Messi", "40", "Argentina", "Striker", "69");
-		add_player("Man United", "Messi", "40", "Argentina", "Striker", "69");
+		add_player("Man United", "M", "40", "Argentina", "Striker", "69");
+		add_player("Man United", "Me", "40", "Argentina", "Striker", "69");
+		add_player("Man United", "Mes", "40", "Argentina", "Striker", "69");
 		
-		add_player("Man City", "Ronaldo", "40", "Porugal", "Stiker", "420");
-		add_player("Man City", "Ronaldo", "40", "Porugal", "Stiker", "420");
-		add_player("Man City", "Ronaldo", "40", "Porugal", "Stiker", "420");
+		add_player("Man City", "R", "40", "Porugal", "Stiker", "420");
+		add_player("Man City", "Ro", "40", "Porugal", "Stiker", "420");
+		add_player("Man City", "Ron", "40", "Porugal", "Stiker", "420");
+		add_player("Man City", "Rona", "40", "Porugal", "Stiker", "420");
+		add_player("Man City", "Ronal", "40", "Porugal", "Stiker", "420");
+
+
 
 		//print__teams();
 		//print_players_by_team("Man City", true);
 		//player_summary("Ronaldo");
 		
-		add_goal("Messi", 1);
-		add_goal("Ronaldo", 2);
-		highest_goals();
+		add_goal("M", 1);
+		add_goal("Rona", 2);
+		add_goal("R", 5);	
+		add_goal("Ro", 20);
+		add_goal("Ron", 40);	
+		top_scorers(40);
 
 
 
@@ -320,7 +444,7 @@ public class App {
 
 
 
-		add_team("Man City");
+		//add_team("Man City");
 
 
 
