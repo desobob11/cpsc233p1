@@ -557,11 +557,8 @@ public static void top_goalis(int number_of) {
 		System.out.println(max_value);
 		System.out.println("   is the maximum value from" + "\n" + table_name);
 	}
-<<<<<<< HEAD
-=======
 
 
->>>>>>> 8b6a757edfb03fe75a183182c495836c9b4cd645
 
 
 /**************************************************************************************
@@ -939,20 +936,6 @@ public static void top_goalis(int number_of) {
 		}
 	}
 
-<<<<<<< HEAD
-	String[] options = {"Add Team" , "Add Player", "Add Goal" , "Add Save" , "Add Shot on Goal",
-						"Add Assist" , "Add Shot on Goal" , "Print Summary of Player" , "Print players in a team",
-						"Print League by Team" , "Print All Teams" , "Players with most goals",
-						"Print Top Scorers" , "Print Top Assisters" , "Print Top Goalies" , 
-						"Print Score or Save Percentages", "Print Mean of Team" , "Median of Team",
-						"Sum of Table"
-
-
-					};
-
-
-					
-=======
 	
 	public static void input_max_table() {
 		Scanner input = new Scanner(System.in);
@@ -1086,7 +1069,6 @@ public static void top_goalis(int number_of) {
 
 
 
->>>>>>> f097058a137596f0a7dbd787ae71336f7d793981
 
 
 
@@ -1152,7 +1134,7 @@ public static void top_goalis(int number_of) {
 		add_goal("Ro", 20);
 		add_goal("Ron", 40);
 		//top_scorers(40);
-		sum_table(goals, "Goals");
+		//sum_table(goals, "Goals");
 
 
 		run();
@@ -1189,25 +1171,4 @@ public static void top_goalis(int number_of) {
     	
     	
     }
-
-	private static void print_map(HashMap<String, ArrayList<String>> teams2) {
-		// TODO Auto-generated method stub
-		
-	}
-}
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 
