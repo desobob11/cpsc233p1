@@ -764,6 +764,12 @@ public class App {
 		}
 	}
 
+
+	/**
+	 * 
+	 * Add shots on goal through System.in
+	 * 
+	 */
 	public static void input_add_shot_on_goal() {
 		Scanner input = new Scanner(System.in);
 
@@ -771,6 +777,7 @@ public class App {
 		String name = input.nextLine();
 		int shots = Integer.parseInt(input.nextLine());
 
+		//check to see if player exists
 		boolean check = false;
 		for (String team : teams.keySet()) {
 			for (String player : teams.get(team)) {
@@ -779,9 +786,11 @@ public class App {
 				}
 			}
 		}
+		//if player exists, add shots on goals
 		if (check) {
 			add_shot_on_goal(name, shots);
 		}
+		//if player doesn't exist, error and try again
 		else {
 			System.out.println("Error. No Player with that name");
 			input_add_shot_on_goal();
@@ -789,7 +798,11 @@ public class App {
 
 	}
 
-
+	/**
+	 * 
+	 * Add assists through System.in
+	 * 
+	 */
 	public static void input_add_assist() {
 		Scanner input = new Scanner(System.in);
 
@@ -797,6 +810,7 @@ public class App {
 		String name = input.nextLine();
 		int assists = Integer.parseInt(input.nextLine());input.nextLine();
 
+		//check to see if player exists
 		boolean check = false;
 		for (String team : teams.keySet()) {
 			for (String player : teams.get(team)) {
@@ -805,16 +819,22 @@ public class App {
 				}
 			}
 		}
+		//if player exists, add assist
 		if (check) {
 			add_assist(name, assists);
 		}
+		//otherwise, error and try again
 		else {
 			System.out.println("Error. No Player with that name");
 			input_add_assist();
 		}
 
 	}
-
+	/**
+	 * 
+	 * Add shots on goalie through System.in
+	 * 
+	 */
 	public static void input_add_shot_on_goalie() {
 		Scanner input = new Scanner(System.in);
 
@@ -822,6 +842,8 @@ public class App {
 		String name = input.nextLine();
 		int assists = Integer.parseInt(input.nextLine());
 
+
+		//check to see if player exists
 		boolean check = false;
 		for (String team : teams.keySet()) {
 			for (String player : teams.get(team)) {
@@ -830,9 +852,11 @@ public class App {
 				}
 			}
 		}
+		//if player exists, add shots on goalie
 		if (check) {
 			add_shot_on_goalie(name, assists);
 		}
+		//otherwise, error and try again
 		else {
 			System.out.println("Error. No Player with that name");
 			input_add_shot_on_goalie();
@@ -840,85 +864,142 @@ public class App {
 		
 	}
 
+	/**
+	 * Method to choose team to print players of teams using System.in
+	 * 
+	 */
 	public static void input_print_players_by_team() {
 		Scanner input = new Scanner(System.in);
 		boolean detail_choice;
 		
-		System.out.println("Please Enter (n)ame only or (s)ummarized detalils\n");
-		String team = input.nextLine();
-		String details = input.nextLine().toLowerCase();
-		if ("n".equals(details)) {
-			detail_choice = false; 
-			print_players_by_team(team, detail_choice);
-		}
-		else if ("s".equals(details)) {
-			detail_choice = true;
-			print_players_by_team(team, detail_choice);
 
+		System.out.println("Please Enter (n)ame only or (s)ummarized detalils\n");
+		String team_name = input.nextLine();
+
+		//check to see if team exists
+		boolean check = false;
+			for (String team : teams.keySet()) {
+				if (team.equals(team_name)) {
+					check = true;
+				}
+			}
+		//if team exists, print players in team
+		if (check) {
+			String details = input.nextLine().toLowerCase();
+			//if user chooses names only, set detail_choice to false and print just player names
+			if ("n".equals(details)) {
+				detail_choice = false; 
+				print_players_by_team(team_name, detail_choice);
+			}
+			//if user wants full player summary, they entered s, set detail_choice to true and print full summaries
+			else if ("s".equals(details)) {
+				detail_choice = true;
+				print_players_by_team(team_name, detail_choice);
+
+			}
+			//if user entered invalid input, error and try again
+			else {
+				System.out.println("Error, not a valid choice\n");
+				input_print_players_by_team();
+			}
 		}
+		//if team doesn't exist, error and try again
 		else {
-			System.out.println("Error, not a valid choice\n");
+			System.out.println("Error, No Team Exists with That Name\n");
 			input_print_players_by_team();
 		}
 	}
 
 
-
+	/**
+	 * 
+	 * Method to print entire league through response through System.in
+	 * 
+	 */
 	public static void input_print_league() {
 		Scanner input = new Scanner(System.in);
 
 		System.out.println("Please Enter (n)ame only or (s)ummarized detalils\n");
-
+		
+		//boolean to track whether user wants player names or full player sumamry
 		boolean detail_choice;
 		String details = input.nextLine().toLowerCase();
+		//if player chooses names only, set choice to false and show names only
 		if ("n".equals(details)) {
 			detail_choice = false; 
 			print_league(detail_choice);
 		}
+		//if player chooses summary, set choice to true and print player summaries
 		else if ("s".equals(details)) {
 			detail_choice = true;
 			print_league(detail_choice);
 
 		}
+		//if input is invalid, error and try again
 		else {
 			System.out.println("Error, not a valid choice\n");
 			input_print_league();
 		}
 	}
 
+	/**
+	 * 
+	 * Input top scorers through choice through System.in
+	 * 
+	 */
 	public static void input_top_scorers() {
 		Scanner input = new Scanner(System.in);
 
 		System.out.println("Top 'n' Scorers\n");
 
+		//choose how many top scorers to display
 		int response = Integer.parseInt(input.nextLine());
 		top_scorers(response);
 	}
 
+	/**
+	 * 
+	 * Input top assisters through choice through System.in
+	 * 
+	 */
 	public static void input_top_assisters() {
 		Scanner input = new Scanner(System.in);
 
 		System.out.println("Top 'n' Assisters\n");
 
+		//choose how many top assisters to display
 		int response = Integer.parseInt(input.nextLine());
 		top_assisters(response);
 	}
 
+	/**
+	 * 
+	 * Input top goalies through choice through System.in
+	 * 
+	 */
 	public static void input_top_goalis() {
 		Scanner input = new Scanner(System.in);
 
 		System.out.println("Top 'n' Goalis\n");
 
+		//choose how many top goalies to display
 		int response = Integer.parseInt(input.nextLine());
 		top_goalis(response);
 	}
 
+
+	/**
+	 * Method to allow display of player score or save percentage through System.in
+	 * 
+	 * 
+	 */
 	public static void input_score_and_save_percent() {
 		Scanner input = new Scanner(System.in);
 
 		System.out.println("Please enter Player Name");
 		String player_name = input.nextLine();
 
+		//check to see if player exists
 		boolean check = false;
 		for (String team : teams.keySet()) {
 			for (String player : teams.get(team)) {
@@ -927,21 +1008,30 @@ public class App {
 				}
 			}
 		}
+		//if player exixts, display save or shot percentage
 		if (check) {
 			score_and_save_percent(player_name);
 		}
+		//otherise, error and try again
 		else {
 			System.out.println("Error. No Player with that name");
 			input_score_and_save_percent();
 		}
 	}
 
+	/**
+	 * 
+	 * System.in choose to print mean table
+	 * 
+	 */
 	public static void input_mean_table() {
 		Scanner input = new Scanner(System.in);
 
 		System.out.println("Please enter a Stat: (g)oals, (s)aves, (a)ssists, shots_on_(goal), shots_on_(goalie)");
+		//take response
 		String response = input.nextLine().toLowerCase();
 
+		//different options for different stat chosen
 		if ("g".equals(response)) {
 			mean_table(goals, "Goals");
 		}
@@ -962,13 +1052,19 @@ public class App {
 			input_mean_table();
 		}
 	}
-
+	/**
+	 * 
+	 * Print median of table through System.in input
+	 * 
+	 */
 	public static void input_median_table() {
 		Scanner input = new Scanner(System.in);
 
 		System.out.println("Please enter a Stat: (g)oals, (s)aves, (a)ssists, shots_on_(goal), shots_on_(goalie)");
+		//take input for stat choice
 		String response = input.nextLine().toLowerCase();
 
+		//choose different stat hashmap based on user response
 		if ("g".equals(response)) {
 			median_table(goals, "Goals");
 		}
@@ -990,12 +1086,20 @@ public class App {
 		}
 	}
 
+	/**
+	 * 
+	 * Print sum of table through System.in input
+	 * 
+	 */
 	public static void input_sum_table() {
 		Scanner input = new Scanner(System.in);
 
 		System.out.println("Please enter a Stat: (g)oals, (s)aves, (a)ssists, shots_on_(goal), shots_on_(goalie)");
+		
+		//take stat based on user response
 		String response = input.nextLine().toLowerCase();
 
+		//choose different stat hashmap based on user response
 		if ("g".equals(response)) {
 			sum_table(goals, "Goals");
 		}
@@ -1073,18 +1177,26 @@ public class App {
 	}
 
 	
-
+	/**
+	 * 
+	 * Method that represents the main menu of the application
+	 * 
+	 */
 	public static void run() {
 		Scanner input = new Scanner(System.in);
+		//print possible user decisions
 		System.out.println("1. Add Team\n2. Add Player\n 3. Add Goal\n 4. Add Save\n 5. Add Shot on Goal");
 		System.out.println("6. Add Assist\n7. Add Shot on goalie\n 8. Players by Team");
 		System.out.println("9. Print League\n10. Print Teams\n 11. Player with Most Goals");
 		System.out.println("12. Top 'n' Scorers\n13. Print 'n' Top Assisters\n 14. Print 'n' Top Goalies");
 		System.out.println("15. Score or Save Percentage\n16. Mean of Team Stat\n 17. Median of Team Stat");
 		System.out.println("18. Sum of Team Stat\n19. Min of Team Stat\n 20. Max of Team Stat\n\n");
-
+		
+		//Take in user decision
 		String response = input.nextLine();
 
+
+		//call different methods based on user decision
 		if ("1".equals(response)) {
 			input_add_team();
 			input.nextLine();
@@ -1212,9 +1324,14 @@ public class App {
 	
 	
 	
-	
+	/**
+	 * Main method
+	 * 
+	 * @param args - command line agruments
+	 */
     public static void main(String[] args) {
     	
+		//instantiate hashmaps
 		teams 			= new HashMap<String, ArrayList<String>>();
 		ages 			= new HashMap<String, String>();
 		countries 		= new HashMap<String, String>();
@@ -1226,7 +1343,7 @@ public class App {
 		shots_on_goal 	= new HashMap<String, String>();
 		shots_on_goalie = new HashMap<String, String>();
 
-
+		//create arraylist to store hashmaps and add each hashmap to arraylist
 		all_maps = new ArrayList<HashMap<String, String>>();
 		all_maps.add(ages);
 		all_maps.add(countries);
@@ -1238,7 +1355,7 @@ public class App {
 		all_maps.add(shots_on_goal);
 
 
-
+		//run program
 		run();
 
 
