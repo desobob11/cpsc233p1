@@ -52,6 +52,7 @@ public class App {
 	private static HashMap<String, String> saves;
 	private static HashMap<String, String> assists;
 	private static HashMap<String, String> shots_on_goal;
+	private static HashMap<String, String> shots_on_goalie;
 	private static ArrayList<HashMap<String, String>> all_maps;
 
 	/**
@@ -156,6 +157,15 @@ public class App {
 		int assist_int = Integer.parseInt(assists.get(player_name));
 		assist_int += assists_num;
 		assists.replace(player_name, String.valueOf(assist_int));
+	}
+
+	/**
+	 * Increments number of shots made on a goalie
+	 */
+	public static void add_shot_on_goalie(String player_name, int shot_on_goalie_num){
+		int shot_on_goalie_int = Integer.parseInt(shots_on_goalie.get(player_name));
+		shot_on_goalie_int += shot_on_goalie_num;
+		shots_on_goalie.replace(player_name, String.valueOf(shot_on_goalie_int));
 	}
 	/**
 	 * Print summary of player statistic
@@ -307,7 +317,8 @@ public class App {
 		String position = positions.get(player_name);
 		if (position == "goalie") {
 			System.out.println(player_name + "'s save percentage is:");
-			save_percent =
+			float save_percent = ((saves.get(player_name)) / (shots_on_goalie.get(player_name)));
+			System.out.println(save_percent);
 
 		}
 
