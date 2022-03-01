@@ -512,6 +512,26 @@ public static void top_goalis(int number_of) {
 
 	}
 
+	public static void min_table(HashMap<String, String> map, String table_name){
+		if(map.values().size() == 0){
+			System.out.println("ERROR! That table is empty");
+		}
+
+		int min_value =Integer.parseInt(Collections.min(map.values()));
+		System.out.println(min_value);
+		}
+
+
+	public static void max_table(HashMap<String, String> map, String table_name){
+		if(map.values().size() == 0){
+			System.out.println("ERROR! That table is empty");
+		}
+
+		int max_value =Integer.parseInt(Collections.max(map.values()));
+		System.out.println(max_value);
+	}
+
+
 
 
 /**************************************************************************************
