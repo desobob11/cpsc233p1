@@ -519,6 +519,7 @@ public static void top_goalis(int number_of) {
 
 		int min_value =Integer.parseInt(Collections.min(map.values()));
 		System.out.println(min_value);
+		System.out.println("   is the minimum value from" + "\n" + table_name);
 		}
 
 
@@ -529,6 +530,7 @@ public static void top_goalis(int number_of) {
 
 		int max_value =Integer.parseInt(Collections.max(map.values()));
 		System.out.println(max_value);
+		System.out.println("   is the maximum value from" + "\n" + table_name);
 	}
 
 
