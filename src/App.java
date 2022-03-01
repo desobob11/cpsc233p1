@@ -424,14 +424,14 @@ public static void top_goalis(int number_of) {
 	public static void score_and_save_percent(String player_name) {
 		String position = positions.get(player_name);
 		player_name = player_name.toLowerCase();
-		if ("goalie".equals(positions.get(player_name))) {
+		if ("goalie".equals(position)) {
 			System.out.println(player_name + "'s save percentage is:");
 			float save_percent = (Integer.parseInt((saves.get(player_name))) / (Integer.parseInt(shots_on_goalie.get(player_name))));
 			System.out.println(save_percent);
 
 		}
 
-		if (!"goalie".equals(positions.get(player_name))){
+		if (!"goalie".equals(position)){
 			System.out.println(player_name + "'s goal percentage is:");
 			float goal_percent = ((Integer.parseInt(goals.get(player_name))) / (Integer.parseInt(shots_on_goal.get(player_name)))) * 100;
 			System.out.println(goal_percent);
@@ -544,9 +544,14 @@ public static void top_goalis(int number_of) {
  * ************************************************************************************
  */
 
+
+
+
 public static void run() {
 
-	
+	System.out.println("1. Add Team\n2. Add Player\n 3. Add Goal\n 4. Add Save\n 5. Add Shot on Goal");
+	System.out.println("6. Add Team\n2. Add Player\n 3. Add Goal\n 4. Add Save\n 5. Add Shot on Goal");
+
 
 
 
