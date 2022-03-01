@@ -336,32 +336,45 @@ public class App {
 
 	}
 
+	/**
+	 * Prints the top 'n' scorers in the league
+	 * 
+	 * 
+	 * @param number_of - number of top scorers to display
+	 */
 
 	public static void top_scorers(int number_of) {
 		System.out.println(String.format("Top %d scorers:\n-----------------------------------\n", number_of));
+
+			//Arraylists to store all goal counts, and then top goal counts
 			ArrayList<Integer> all_counts = new ArrayList<Integer>();
 			ArrayList<Integer> top_counts = new ArrayList<Integer>();
 
-
+			//iterate through all pairs in goals
 			for (Map.Entry<String, String> set : goals.entrySet()) {
+				//add each player's goals to arraylist
 				all_counts.add(Integer.parseInt(set.getValue()));
 			}
 
+			//sort all_counts from high to low
 			Collections.sort(all_counts);
 			Collections.reverse(all_counts);
 
+			//if there are less scorers than input, just add all players goals as top goals
 			if (all_counts.size() < number_of) {
 				for (int count : all_counts) {
 					top_counts.add(count);
 				}
 			}
 
+			//otherwise, just add top 'n' players goals to top goals
 			else {
 				for (int i = 0; i < number_of; ++i) {
 					top_counts.add(all_counts.get(all_counts.size() - 1 - i));
 				}
 			}
 
+			//for all goals in top goals, print of player stats that have that many goals
 			for (int count : top_counts) {
 				for (Map.Entry<String, String> key : goals.entrySet()) {
 					if (Integer.parseInt(goals.get(key.getKey())) == count) {
@@ -371,31 +384,46 @@ public class App {
 			}
 	}
 
-public static void top_assisters(int number_of) {
-	System.out.println(String.format("Top %d Assisters:\n-----------------------------------\n", number_of));
+
+	/**
+	 * 
+	 * Displays top 'n' assister player stats in the league
+	 * 
+	 * 
+	 * @param number_of - 'n' number of assisters to display
+	 */
+	public static void top_assisters(int number_of) {
+		System.out.println(String.format("Top %d Assisters:\n-----------------------------------\n", number_of));
+
+		//arraylists to store all assist counts and top 'n' assist counts
 		ArrayList<Integer> all_counts = new ArrayList<Integer>();
 		ArrayList<Integer> top_counts = new ArrayList<Integer>();
 
-
+		//add each player's assist stats into arraylist
 		for (Map.Entry<String, String> set : assists.entrySet()) {
 			all_counts.add(Integer.parseInt(set.getValue()));
 		}
 
+		//sort arraylist from high to low
 		Collections.sort(all_counts);
 		Collections.reverse(all_counts);
 
+
+		//if less players than 'n', add all players assist counts to array list
 		if (all_counts.size() < number_of) {
 			for (int count : all_counts) {
 				top_counts.add(count);
 			}
 		}
 
+		//othersise, add top 'n' assist counts to array list
 		else {
 			for (int i = 0; i < number_of; ++i) {
 				top_counts.add(all_counts.get(all_counts.size() - 1 - i));
 			}
 		}
-
+		
+		//for each assist count in top count array list, print each player summary with corresponding count
 		for (int count : top_counts) {
 			for (Map.Entry<String, String> key : assists.entrySet()) {
 				if (Integer.parseInt(assists.get(key.getKey())) == count) {
@@ -405,32 +433,43 @@ public static void top_assisters(int number_of) {
 		}
 	}
 
+	/**
+	 * Dispay top 'n' goalie summaries
+	 * 
+	 * 
+	 * @param number_of - 'n' goalies to display
+	 */
+	public static void top_goalis(int number_of) {
+		System.out.println(String.format("Top %d Goalies:\n-----------------------------------\n", number_of));
 
-public static void top_goalis(int number_of) {
-	System.out.println(String.format("Top %d Goalies:\n-----------------------------------\n", number_of));
+		//Arraylists to store all save counts and top save counts
 		ArrayList<Integer> all_counts = new ArrayList<Integer>();
 		ArrayList<Integer> top_counts = new ArrayList<Integer>();
 
-
+		//add each goalie's save counts to arraylist
 		for (Map.Entry<String, String> set : saves.entrySet()) {
 			all_counts.add(Integer.parseInt(set.getValue()));
 		}
 
+		//sort all save counts from high to low
 		Collections.sort(all_counts);
 		Collections.reverse(all_counts);
 
+		//if less goalies than 'n', just add all goalies saves to top saves list
 		if (all_counts.size() < number_of) {
 			for (int count : all_counts) {
 				top_counts.add(count);
 			}
 		}
 
+		//otherwise, add top 'n' goalies saves to top saves list
 		else {
 			for (int i = 0; i < number_of; ++i) {
 				top_counts.add(all_counts.get(all_counts.size() - 1 - i));
 			}
 		}
 
+		//print player summaries for all players who have one of top save counts
 		for (int count : top_counts) {
 			for (Map.Entry<String, String> key : saves.entrySet()) {
 				if (Integer.parseInt(saves.get(key.getKey())) == count) {
@@ -463,50 +502,77 @@ public static void top_goalis(int number_of) {
 		}
 	}
 
+	/**
+	 * Displays the one of mean goals, assists, shots on goal, saves, shots on goalie, for each team
+	 * 
+	 * 
+	 * @param map - desired stat hashmap
+	 * @param table_name - desired name to display for statistics
+	 */
 	public static void mean_table(HashMap<String, String> map, String table_name) {
+		//if table is empty, print error message and run method again
 		if (map.values().size() == 0) {
 			System.out.println("ERROR! Table is empty\n");
-			return;
+			mean_table(HashMap<String, String> map, String table_name);
 		}
 
+		//iterate through each team in table
 		for (String team : teams.keySet()) {
 			System.out.println(team + "\n-----------------------------------\n");
+			//track sum of team values
 			float sum_of_team_values = 0;
+			//iterate through each player in team
 			for (String player : teams.get(team)) {
+				//increment total sum by player stat
 				sum_of_team_values += Integer.parseInt(map.get(player));
 			}
+			//calculate mean of stat
 			float mean = sum_of_team_values / (float)map.values().size();
+			//print mean of team stat
 			System.out.println(String.format("       -Mean of %s %s: %f", team, table_name, mean));
 		}
 		System.out.println("\n");
 
 	}
 
+	/**
+	 * 
+	 * Display median of desired stat for each team
+	 * 
+	 * @param map - desired stat hashmap
+	 * @param table_name - desired name of stat to display
+	 */
 	public static void median_table(HashMap<String, String> map, String table_name) {
+		//if table is empty, print error message and try again
 		if (map.values().size() == 0) {
 			System.out.println("ERROR! Table is empty\n");
-			return;
+			median_table(map, table_name);
 		}
 
+		//iterate through each team
 		for (String team : teams.keySet()) {
 			System.out.println(team + "\n-----------------------------------\n");
+			//values arraylist to add stats
 			ArrayList<Integer> values = new ArrayList<Integer>();
-
+			//iterate through each player
 			for (String player : teams.get(team)) {
+				//if player has stat, append to values
 				if (Integer.parseInt(map.get(player)) > 0) {
 					values.add(Integer.parseInt(map.get(player)));
 				}
 			}
 
+			//sort values
 			Collections.sort(values);
-			System.out.println(values.size());
-
+			
+			//if uneven length of values, get single median
 			if (values.size() % 2 != 0) {
 				int index = (int)Math.ceil((float)values.size() / 2f);
 				System.out.println(index);
 				System.out.println(String.format("       -Median of %s %s: %s", team, table_name, index));
 			}
 
+			//if even length of values, get two median values
 			else {
 				int first_median = values.size() / 2;
 				int second_median = first_median + 1;
@@ -516,17 +582,31 @@ public static void top_goalis(int number_of) {
 		}
 	}
 
+	/**
+	 * 
+	 * Display sum of desired stat for each team
+	 * 
+	 * @param table
+	 * @param table_name
+	 */
 	public static void sum_table(HashMap<String, String> table, String table_name) {
+
+		//if table is empty, print error message and try again.
 		if (table.values().size() == 0) {
 			System.out.println("ERROR! That table is empty");
+			sum_table(table, table_name);
 		}
 
+		//iterate through each team
 		for (String team : teams.keySet()) {
+			//track sum of stat
 			int team_sum = 0;
 			System.out.println(team + "\n-----------------------------------\n");
+			//for each player in team, add count of stat to sum
 			for (String player : teams.get(team)) {
 				team_sum += Integer.parseInt(table.get(player));
 			}
+			//print sum for each team
 			System.out.println(String.format("       -Sum of %s %s: %s", team, table_name, team_sum));
 		}
 		System.out.println("\n");
@@ -569,6 +649,10 @@ public static void top_goalis(int number_of) {
  */
 
 
+	/**
+	 * Method to import team
+	 * 
+	 */
 	public static void input_add_team() {
 		Scanner input = new Scanner(System.in);
 		System.out.println("Please print a Team Name to Add");
@@ -577,11 +661,17 @@ public static void top_goalis(int number_of) {
 		add_team(response);
 	}
 
-
+	/**
+	 * 
+	 * Method to import player
+	 * 
+	 */
 	public static void input_add_player() {
 		Scanner input = new Scanner(System.in);
 
 		System.out.println("Enter Player Data Individually:\nTeam Name\nPlayer Name\nAge\nCoutnry of Origin\nPosition\nJersey Number");
+		
+		//Take each value in indepentently from System.in
 		String team_name = input.nextLine();
 		String player = input.nextLine();
 		String age = input.nextLine();
@@ -589,15 +679,18 @@ public static void top_goalis(int number_of) {
 		String position = input.nextLine();
 		String jersery = input.nextLine();
 
+		//check each team to compare against desired team name
 		boolean check = false;
 		for (String team : teams.keySet()) {
 			if (team_name.equals(team)) {
 				check = true;
 			}
 		}
+		//if team exists, add player
 		if (check) {
 			add_player(team_name, player, age, country, position, jersery);
 		}
+		//if not, print error message and try again
 		else {
 			System.out.println("Error. No Team with that name");
 			input_add_player();
@@ -606,6 +699,11 @@ public static void top_goalis(int number_of) {
 
 	}
 
+	/**
+	 * 
+	 * Add goal through System.in
+	 * 
+	 */
 	public static void input_add_goal() {
 		Scanner input = new Scanner(System.in);
 
@@ -613,6 +711,7 @@ public static void top_goalis(int number_of) {
 		String player_name = input.nextLine();
 		int goals = Integer.parseInt(input.nextLine());
 
+		//check to see if player exists with desired name
 		boolean check = false;
 		for (String team : teams.keySet()) {
 			for (String player : teams.get(team)) {
@@ -621,16 +720,23 @@ public static void top_goalis(int number_of) {
 				}
 			}
 		}
+
+		//if player exists, add goals
 		if (check) {
 			add_goal(player_name, goals);
 		}
+		//if not, print error and try again
 		else {
 			System.out.println("Error. No Player with that name");
 			input_add_goal();
 			
 		}
 	}
-
+	/**
+	 * 
+	 * Add saves through System.in
+	 * 
+	 */
 	public static void input_add_save() {
 		Scanner input = new Scanner(System.in);
 
@@ -638,6 +744,7 @@ public static void top_goalis(int number_of) {
 		String name = input.nextLine();
 		int saves = Integer.parseInt(input.nextLine());
 
+		//see if player exists
 		boolean check = false;
 		for (String team : teams.keySet()) {
 			for (String player : teams.get(team)) {
@@ -646,9 +753,11 @@ public static void top_goalis(int number_of) {
 				}
 			}
 		}
+		//if exists, add saves
 		if (check) {
 			add_save(name, saves);
 		}
+		//if not, error message and try again
 		else {
 			System.out.println("Error. No Player with that name");
 			input_add_save();
