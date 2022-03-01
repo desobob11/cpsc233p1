@@ -1,6 +1,6 @@
 /**
  * 
- *TESTEDDDDDD
+ *
  *
  * 
  * This is a simple Java application
@@ -15,6 +15,7 @@
  * 		    30064340
  * 
  * @author	Sean Honour Yuan An Tan
+ * 			30094560
  * 			
  * 
  * 
