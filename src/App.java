@@ -26,8 +26,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.Collections;
-
-import javax.swing.plaf.synth.SynthSpinnerUI;
+import java.util.Scanner;
 
 import java.util.Arrays;
 
@@ -101,18 +100,21 @@ public class App {
 			System.out.println("ERROR! Player already exists in this team!");
 			return;
 		}
+
+		String lower_case_position = position.toLowerCase();
 		//for goalies, add to team and add relevant goalie statistics
-		if (position == "goalie"){
+		if ("goalie".equals(lower_case_position)){
 			teams.get(team_name).add(player_name);
 			ages.put(player_name, age);
 			countries.put(player_name, country);
 			positions.put(player_name, position);
 			jerseys.put(player_name, jersey);
 			saves.put(player_name, "0");
+			shots_on_goalie.put(player_name, "0");
 		}
 
 		//for non goalie players, add to team and add relevant non goalie statistics
-		if(position != "goalie"){
+		if(!"goalie".equals(lower_case_position)){
 			teams.get(team_name).add(player_name);
 			ages.put(player_name, age);
 			countries.put(player_name, country);
@@ -445,22 +447,19 @@ public static void top_goalis(int number_of) {
 	 */
 	public static void score_and_save_percent(String player_name) {
 		//get player position ,store in variable
-		String position = positions.get(player_name);
+		String position = positions.get(player_name).toLowerCase();
 		//set player name to lower case to avoid having same player with different capitalization
-		player_name = player_name.toLowerCase();
 		// if player position is goalie, calculate total saves divided by
-		if ("goalie".equals(positions.get(player_name))) {
+		if ("goalie".equals(position)) {
 			System.out.println(player_name + "'s save percentage is:");
-			float save_percent = (Integer.parseInt((saves.get(player_name))) / (Integer.parseInt(shots_on_goalie.get(player_name))));
+			float save_percent = (Float.parseFloat((saves.get(player_name))) / (Float.parseFloat(shots_on_goalie.get(player_name)))) * 100;
 			System.out.println(save_percent);
-
 		}
 
-		if (!"goalie".equals(positions.get(player_name))){
+		if (!"goalie".equals(position)){
 			System.out.println(player_name + "'s goal percentage is:");
-			float goal_percent = ((Integer.parseInt(goals.get(player_name))) / (Integer.parseInt(shots_on_goal.get(player_name)))) * 100;
+			float goal_percent = ((Float.parseFloat(goals.get(player_name))) / (Float.parseFloat(shots_on_goal.get(player_name)))) * 100;
 			System.out.println(goal_percent);
-
 		}
 	}
 
@@ -736,10 +735,10 @@ public static void top_goalis(int number_of) {
 		Scanner input = new Scanner(System.in);
 		boolean detail_choice;
 		
-		System.out.println("Please Enter (f)ull or (s)ummarized detalils\n");
+		System.out.println("Please Enter (n)ame only or (s)ummarized detalils\n");
 		String team = input.nextLine();
 		String details = input.nextLine().toLowerCase();
-		if ("f".equals(details)) {
+		if ("n".equals(details)) {
 			detail_choice = false; 
 			print_players_by_team(team, detail_choice);
 		}
@@ -759,11 +758,11 @@ public static void top_goalis(int number_of) {
 	public static void input_print_league() {
 		Scanner input = new Scanner(System.in);
 
-		System.out.println("Please Enter (f)ull or (s)ummarized detalils\n");
+		System.out.println("Please Enter (n)ame only or (s)ummarized detalils\n");
 
 		boolean detail_choice;
 		String details = input.nextLine().toLowerCase();
-		if ("f".equals(details)) {
+		if ("n".equals(details)) {
 			detail_choice = false; 
 			print_league(detail_choice);
 		}
@@ -979,82 +978,102 @@ public static void top_goalis(int number_of) {
 
 		if ("1".equals(response)) {
 			input_add_team();
+			input.nextLine();
 			run();
 		}
 		else if ("2".equals(response)) {
 			input_add_player();
+			input.nextLine();
 			run();
 		}
 		else if ("3".equals(response)) {
 			input_add_goal();
+			input.nextLine();
 			run();
 		}
 		else if ("4".equals(response)) {
 			input_add_save();
+			input.nextLine();
 			run();
 		}
 		else if ("5".equals(response)) {
 			input_add_shot_on_goal();
+			input.nextLine();
 			run();
 		}
 		else if ("6".equals(response)) {
 			input_add_assist();
+			input.nextLine();
 			run();
 		}
 		else if ("7".equals(response)) {
 			input_add_shot_on_goalie();
+			input.nextLine();
 			run();
 		}
 		else if ("8".equals(response)) {
 			input_print_players_by_team();
+			input.nextLine();
 			run();
 		}
 		else if ("9".equals(response)) {
 			input_print_league();
+			input.nextLine();
 			run();
 		}
 		else if ("10".equals(response)) {
 			print__teams();
+			input.nextLine();
 			run();
 		}
 		else if ("11".equals(response)) {
 			highest_goals();
+			input.nextLine();
 			run();
 		}
 		else if ("12".equals(response)) {
 			input_top_scorers();
+			input.nextLine();
 			run();
 		}
 		else if ("13".equals(response)) {
 			input_top_assisters();
+			input.nextLine();
 			run();
 		}
 		else if ("14".equals(response)) {
 			input_top_goalis();
+			input.nextLine();
 			run();
 		}
 		else if ("15".equals(response)) {
 			input_score_and_save_percent();
+			input.nextLine();
 			run();
 		}
 		else if ("16".equals(response)) {
 			input_mean_table();
+			input.nextLine();
 			run();
 		}
 		else if ("17".equals(response)) {
 			input_mean_table();
+			input.nextLine();
 			run();
 		}
 		else if ("18".equals(response)) {
 			input_sum_table();
+			input.nextLine();
 			run();
 		}
 		else if ("19".equals(response)) {
 			input_min_table();
+			input.nextLine();
 			run();
 		}
 		else if ("20".equals(response)) {
 			input_max_table();
+			input.nextLine();
 			run();
 		}
 		else {
@@ -1096,6 +1115,7 @@ public static void top_goalis(int number_of) {
 		saves 			= new HashMap<String, String>();
 		assists 		= new HashMap<String, String>();
 		shots_on_goal 	= new HashMap<String, String>();
+		shots_on_goalie = new HashMap<String, String>();
 
 
 		all_maps = new ArrayList<HashMap<String, String>>();
@@ -1110,45 +1130,11 @@ public static void top_goalis(int number_of) {
 
 
 
-		add_team("Man City");
-		add_team("Man United");
-		add_player("Man United", "M", "40", "Argentina", "Striker", "69");
-		add_player("Man United", "Me", "40", "Argentina", "Striker", "69");
-		add_player("Man United", "Mes", "40", "Argentina", "Striker", "69");
-
-		add_player("Man City", "R", "40", "Porugal", "Stiker", "420");
-		add_player("Man City", "Ro", "40", "Porugal", "Stiker", "420");
-		add_player("Man City", "Ron", "40", "Porugal", "Stiker", "420");
-		add_player("Man City", "Rona", "40", "Porugal", "Stiker", "420");
-		add_player("Man City", "Ronal", "40", "Porugal", "Stiker", "420");
-
-
-
-		//print__teams();
-		//print_players_by_team("Man City", true);
-		//player_summary("Ronaldo");
-
-		add_goal("M", 1);
-		add_goal("Rona", 2);
-		add_goal("R", 5);
-		add_goal("Ro", 20);
-		add_goal("Ron", 40);
-		//top_scorers(40);
-		//sum_table(goals, "Goals");
-
-
 		run();
 
 
 
 
-
-
-
-
-
-
-		//add_team("Man City");
 
 
 
@@ -1171,4 +1157,4 @@ public static void top_goalis(int number_of) {
     	
     	
     }
-
+}
