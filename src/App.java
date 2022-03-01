@@ -66,6 +66,19 @@ public class App {
 	  * @param team_name
 	  */
 	public static void add_team(String team_name) {
+
+		// if team_name string value is invalid dont add
+		if(team_name == null || team_name.equals("")){
+			System.out.println("ERROR! Team name must be a proper string");
+			return;
+		}
+		// if team already exists dont add
+		if(teams.containsKey(team_name)){
+			System.out.println("Error! This team already exists!");
+			return;
+		}
+
+
 		//Create a key, value pair mapping teamname to empty arraylist for players
 		teams.put(team_name, new ArrayList<String>());
 	}
@@ -85,6 +98,7 @@ public class App {
 		//if player is in a team already, don't add
 		if (teams.get(team_name).contains(player_name)) {
 			//need a text message here
+			System.out.println("ERROR! Player already exists in this team!");
 			return;
 		}
 		//for goalies, add to team and add relevant goalie statistics
@@ -418,12 +432,16 @@ public static void top_goalis(int number_of) {
 	}
 
 
-
-
-
+	/**
+	 * Calculates and displays individual players score/save percentage
+	 * @param player_name
+	 */
 	public static void score_and_save_percent(String player_name) {
+		//get player position ,store in variable
 		String position = positions.get(player_name);
+		//set player name to lower case to avoid having same player with different capitalization
 		player_name = player_name.toLowerCase();
+		// if player position is goalie, calculate total saves divided by
 		if ("goalie".equals(positions.get(player_name))) {
 			System.out.println(player_name + "'s save percentage is:");
 			float save_percent = (Integer.parseInt((saves.get(player_name))) / (Integer.parseInt(shots_on_goalie.get(player_name))));
