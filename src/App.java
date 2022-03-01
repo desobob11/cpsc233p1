@@ -532,6 +532,11 @@ public static void top_goalis(int number_of) {
 		System.out.println(max_value);
 		System.out.println("   is the maximum value from" + "\n" + table_name);
 	}
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 8b6a757edfb03fe75a183182c495836c9b4cd645
 
 
 /**************************************************************************************
