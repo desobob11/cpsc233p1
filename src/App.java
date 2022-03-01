@@ -57,6 +57,7 @@ public class App {
 	private static HashMap<String, String> saves;
 	private static HashMap<String, String> assists;
 	private static HashMap<String, String> shots_on_goal;
+	private static HashMap<String, String> shots_on_goalie;
 	private static ArrayList<HashMap<String, String>> all_maps;
 
 	/**
@@ -86,9 +87,28 @@ public class App {
 			//need a text message here
 			return;
 		}
+		//for goalies, add to team and add relevant goalie statistics
+		if (position == "goalie"){
+			teams.get(team_name).add(player_name);
+			ages.put(player_name, age);
+			countries.put(player_name, country);
+			positions.put(player_name, position);
+			jerseys.put(player_name, jersey);
+			saves.put(player_name, "0");
+		}
 		
-		//add player name to arraylist corresponding to team name in hashmap
-		teams.get(team_name).add(player_name);
+		//for non goalie players, add to team and add relevant non goalie statistics
+		if(position != "goalie"){
+			teams.get(team_name).add(player_name);
+			ages.put(player_name, age);
+			countries.put(player_name, country);
+			positions.put(player_name, position);
+			jerseys.put(player_name, jersey);
+			goals.put(player_name, "0");
+			assists.put(player_name, "0");
+			shots_on_goal.put(player_name, "0");
+		}
+
 		
 		/**
 		 * For all other stat hashmaps, add player name as key and add
@@ -96,18 +116,10 @@ public class App {
 		 * 
 		 * Numerical values are defaulted to a String 0
 		 */
-		ages.put(player_name, age);
-		countries.put(player_name, country);
-		positions.put(player_name, position);
-		jerseys.put(player_name, jersey);
-		goals.put(player_name, "0");
-		saves.put(player_name, "0");
-		assists.put(player_name, "0");
-		shots_on_goal.put(player_name, "0");
+
 		
 	}
 
-	
 	/**
 	 * Increment the goal statistic tied to a player
 	 * 
@@ -123,6 +135,42 @@ public class App {
 		goals_as_int += num_goals;
 		goals.replace(player_name, String.valueOf(goals_as_int));
 		
+	}
+	
+	/**
+	 * Increment the saves statistic tied to a goalie
+	 */
+	public static void add_save(String player_name, int num_saves){
+		int saves_as_int = Integer.parseInt(saves.get(player_name));
+		saves_as_int += num_saves;
+		goals.replace(player_name, String.valueOf(saves_as_int));
+	}
+
+	/** Increment the number of shots on goal statistic tied to a player
+	 *
+	 */
+	public static void add_shot_on_goal(String player_name, int shot_on_goal_num){
+		int shot_on_goal_int = Integer.parseInt(shots_on_goal.get(player_name));
+		shot_on_goal_int += shot_on_goal_num;
+		shots_on_goal.replace(player_name, String.valueOf(shot_on_goal_int));
+	}
+
+	/**
+	 * Increments the number of saves statistic tied to a player
+	 */
+	public static void add_assist(String player_name, int assists_num){
+		int assist_int = Integer.parseInt(assists.get(player_name));
+		assist_int += assists_num;
+		assists.replace(player_name, String.valueOf(assist_int));
+	}
+
+	/**
+	 * Increments number of shots made on a goalie
+	 */
+	public static void add_shot_on_goalie(String player_name, int shot_on_goalie_num){
+		int shot_on_goalie_int = Integer.parseInt(shots_on_goalie.get(player_name));
+		shot_on_goalie_int += shot_on_goalie_num;
+		shots_on_goalie.replace(player_name, String.valueOf(shot_on_goalie_int));
 	}
 	
 	/**
@@ -373,6 +421,30 @@ public static void top_goalis(int number_of) {
 
 
 
+	public static void score_and_save_percent(String player_name) {
+		String position = positions.get(player_name);
+		player_name = player_name.toLowerCase();
+		if ("goalie".equals(position.get(player_name))) {
+			System.out.println(player_name + "'s save percentage is:");
+			float save_percent = (Integer.parseInt((saves.get(player_name))) / (Integer.parseInt(shots_on_goalie.get(player_name))));
+			System.out.println(save_percent);
+
+		}
+
+		if (!"goalie".equals(position.get(player_name))){
+			System.out.println(player_name + "'s goal percentage is:");
+			float goal_percent = ((Integer.parseInt(goals.get(player_name))) / (Integer.parseInt(shots_on_goal.get(player_name)))) * 100;
+			System.out.println(goal_percent);
+
+		}
+	}
+/**************************************************************************************
+ * UI SECTION *************************************************************************
+ * ************************************************************************************
+ * ************************************************************************************
+ * ************************************************************************************
+ * ************************************************************************************
+ */
 
 
 	
