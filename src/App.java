@@ -424,20 +424,96 @@ public static void top_goalis(int number_of) {
 	public static void score_and_save_percent(String player_name) {
 		String position = positions.get(player_name);
 		player_name = player_name.toLowerCase();
-		if ("goalie".equals(position.get(player_name))) {
+		if ("goalie".equals(positions.get(player_name))) {
 			System.out.println(player_name + "'s save percentage is:");
 			float save_percent = (Integer.parseInt((saves.get(player_name))) / (Integer.parseInt(shots_on_goalie.get(player_name))));
 			System.out.println(save_percent);
 
 		}
 
-		if (!"goalie".equals(position.get(player_name))){
+		if (!"goalie".equals(positions.get(player_name))){
 			System.out.println(player_name + "'s goal percentage is:");
 			float goal_percent = ((Integer.parseInt(goals.get(player_name))) / (Integer.parseInt(shots_on_goal.get(player_name)))) * 100;
 			System.out.println(goal_percent);
 
 		}
 	}
+
+	public static void mean_table(HashMap<String, String> map, String table_name) {
+		if (map.values().size() == 0) {
+			System.out.println("ERROR! Table is empty\n");
+			return;
+		}
+
+		for (String team : teams.keySet()) {
+			System.out.println(team + "\n-----------------------------------\n");
+			float sum_of_team_values = 0;
+			for (String player : teams.get(team)) {
+				sum_of_team_values += Integer.parseInt(map.get(player));
+			}
+			float mean = sum_of_team_values / (float)map.values().size();
+			System.out.println(String.format("       -Mean of %s %s: %f", team, table_name, mean));
+		}
+		System.out.println("\n");
+
+	}
+
+	public static void median_table(HashMap<String, String> map, String table_name) {
+		if (map.values().size() == 0) {
+			System.out.println("ERROR! Table is empty\n");
+			return;
+		}
+
+		for (String team : teams.keySet()) {
+			System.out.println(team + "\n-----------------------------------\n");
+			ArrayList<Integer> values = new ArrayList<Integer>();
+
+			for (String player : teams.get(team)) {
+				if (Integer.parseInt(map.get(player)) > 0) {
+					values.add(Integer.parseInt(map.get(player)));
+				}
+			}
+
+			Collections.sort(values);
+			System.out.println(values.size());
+
+			if (values.size() % 2 != 0) {
+				int index = (int)Math.ceil((float)values.size() / 2f);
+				System.out.println(index);
+				System.out.println(String.format("       -Median of %s %s: %s", team, table_name, index));
+			}
+
+			else {
+				int first_median = values.size() / 2;
+				int second_median = first_median + 1;
+				System.out.println(String.format("       -Median of %s %s: %d, %d", team, table_name, values.get(first_median), values.get(second_median)));
+			}
+			System.out.println("\n");
+		}
+	}
+
+	public static void sum_table(HashMap<String, String> table, String table_name) {
+		if (table.values().size() == 0) {
+			System.out.println("ERROR! That table is empty");
+		}
+
+		for (String team : teams.keys()) {
+			System.out.println(team + "\n-----------------------------------\n");
+			for (String player : teams.get(team))
+
+
+			
+		}
+		
+		System.out.println(String.format("       -Median of %s %s: %s", team, table_name, index));
+
+
+
+
+	}
+
+
+
 /**************************************************************************************
  * UI SECTION *************************************************************************
  * ************************************************************************************
@@ -503,9 +579,9 @@ public static void top_goalis(int number_of) {
 		add_goal("Rona", 2);
 		add_goal("R", 5);	
 		add_goal("Ro", 20);
-		add_goal("Ron", 40);	
-		top_scorers(40);
-
+		add_goal("Ron", 40);
+		//top_scorers(40);
+		median_table(saves, "Saves");
 
 
 
