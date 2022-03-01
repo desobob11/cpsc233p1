@@ -1,94 +1,164 @@
+import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+
 class AppTest {
 
-    @org.junit.jupiter.api.Test
-    void add_team() {
+    @Test
+    void add_team_key_test() {
+        String team_name_test = "man united";
+        App.add_team(team_name_test);
+        assertTrue(App.teams.containsKey(team_name_test));
+
+    }
+    void add_team_is_empty() {
+        String team_name_test = "man united";
+        App.add_team(team_name_test);
+        assertFalse(App.teams.isEmpty());
+
+
     }
 
-    @org.junit.jupiter.api.Test
-    void add_player() {
+    @Test
+    void add_player_key_test() {
+        App.add_player("man united", "Ronaldo", "38", "Portugal", "Striker", "9");
+        assertTrue(App.teams.containsValue("Ronaldo"));
+    }
+    @Test
+    void add_player_is_empty() {
+        String player_name_test = "Ronaldo";
+        App.add_player("man united", "Ronaldo", "38", "Portugal", "Striker", "9");
+        assertFalse(App.teams.isEmpty());
     }
 
-    @org.junit.jupiter.api.Test
-    void add_goal() {
+    @Test
+    void add_goal_key_test() {
+
+        String player_name_test = "Ronaldo";
+        App.add_goal(player_name_test, 5);
+        assertTrue(App.goals.containsKey(player_name_test));
+    }
+    @Test
+    void add_goal_is_empty() {
+        String player_name_test = "Ronaldo";
+        App.add_goal(player_name_test, 5);
+        assertFalse(App.goals.isEmpty());
     }
 
-    @org.junit.jupiter.api.Test
-    void add_save() {
+    @Test
+    void add_save_key_test() {
+        String player_name_test = "Neuer";
+        App.add_save(player_name_test, 5);
+        assertTrue(App.saves.containsKey(player_name_test));
+    }
+    @Test
+    void add_save_is_empty() {
+        String player_name_test = "Neuer";
+        App.add_save(player_name_test, 5);
+        assertFalse(App.saves.isEmpty());
     }
 
-    @org.junit.jupiter.api.Test
-    void add_shot_on_goal() {
+    @Test
+    void add_shot_on_goal_key_test() {
+        String player_name_test = "Ronaldo";
+        App.add_shot_on_goal(player_name_test, 5);
+        assertTrue(App.shots_on_goal.containsKey(player_name_test));
+    }
+    @Test
+    void add_shot_on_goal_empty() {
+        String player_name_test = "Ronaldo";
+        App.add_shot_on_goal(player_name_test, 5);
+        assertFalse(App.shots_on_goal.isEmpty());
     }
 
-    @org.junit.jupiter.api.Test
-    void add_assist() {
+    @Test
+    void add_assist_empty() {
+        String player_name_test = "Ronaldo";
+        App.add_assist(player_name_test, 5);
+        assertFalse(App.assists.isEmpty());
+
+    }
+    @Test
+    void add_assist_key_test() {
+        String player_name_test = "Ronaldo";
+        App.add_assist(player_name_test, 5);
+        assertTrue(App.assists.containsKey(player_name_test));
+
     }
 
-    @org.junit.jupiter.api.Test
-    void add_shot_on_goalie() {
+    @Test
+    void add_shot_on_goalie_empty() {
+        String player_name_test = "Neuer";
+        App.add_shot_on_goalie(player_name_test, 5);
+        assertFalse(App.shots_on_goalie.isEmpty());
+    }@Test
+    void add_shot_on_goalie_key_test() {
+        String player_name_test = "Neuer";
+        App.add_assist(player_name_test, 5);
+        assertTrue(App.assists.containsKey(player_name_test));
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void player_summary() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void print_players_by_team() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void print_league() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void print__teams() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void highest_goals() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void top_scorers() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void top_assisters() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void top_goalis() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void score_and_save_percent() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void mean_table() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void median_table() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void sum_table() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void min_table() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void max_table() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void run() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void main() {
     }
 }
