@@ -497,15 +497,15 @@ public static void top_goalis(int number_of) {
 			System.out.println("ERROR! That table is empty");
 		}
 
-		for (String team : teams.keys()) {
+		for (String team : teams.keySet()) {
+			int team_sum = 0;
 			System.out.println(team + "\n-----------------------------------\n");
-			for (String player : teams.get(team))
-
-
-			
+			for (String player : teams.get(team)) {
+				team_sum += Integer.parseInt(table.get(player));
+			}
+			System.out.println(String.format("       -Sum of %s %s: %s", team, table_name, team_sum));
 		}
-		
-		System.out.println(String.format("       -Median of %s %s: %s", team, table_name, index));
+		System.out.println("\n");
 
 
 
@@ -522,7 +522,16 @@ public static void top_goalis(int number_of) {
  * ************************************************************************************
  */
 
+public static void run() {
 
+	
+
+
+
+
+
+
+}
 	
 	
 	
@@ -581,7 +590,7 @@ public static void top_goalis(int number_of) {
 		add_goal("Ro", 20);
 		add_goal("Ron", 40);
 		//top_scorers(40);
-		median_table(saves, "Saves");
+		sum_table(goals, "Goals");
 
 
 
