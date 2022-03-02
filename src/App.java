@@ -87,7 +87,7 @@ public class App {
 	 * Adds a player to the data
 	 *
 	 *
-	 * @param team_name ddf
+ * @param team_name
 	 * @param player_name
 	 * @param age
 	 * @param country
@@ -514,7 +514,7 @@ public class App {
 		//if table is empty, print error message and run method again
 		if (map.values().size() == 0) {
 			System.out.println("ERROR! Table is empty\n");
-			mean_table(HashMap<String, String> map, String table_name);
+			mean_table( map, table_name);
 		}
 
 		//iterate through each team in table
@@ -617,23 +617,37 @@ public class App {
 
 	}
 
+	/**
+	 * display min value from desired stat Hashmap
+	 * @param map - desired Hashmap
+	 * @param table_name - name of desired Hashmap
+	 */
 	public static void min_table(HashMap<String, String> map, String table_name){
+		// check if map size is 0, if so return error
 		if(map.values().size() == 0){
 			System.out.println("ERROR! That table is empty");
+			return;
 		}
-
+		// store maps minimum value in variable "min_value" using Collection.min
 		int min_value =Integer.parseInt(Collections.min(map.values()));
 		System.out.println(min_value);
 		System.out.println("   is the minimum value from" + "\n" + table_name);
 		}
 
-
+	/**
+	 * display max value from desired stat Hashmap
+	 * @param map - desired Hashmap
+	 * @param table_name - name of desired Hashmap
+	 */
 	public static void max_table(HashMap<String, String> map, String table_name){
+		//check if map is empty, if so return error
 		if(map.values().size() == 0){
 			System.out.println("ERROR! That table is empty");
+			return;
 		}
-
+		// store maps max value in variable "max_value" using Collections.max
 		int max_value =Integer.parseInt(Collections.max(map.values()));
+		// print "max_value" variable
 		System.out.println(max_value);
 		System.out.println("   is the maximum value from" + "\n" + table_name);
 	}

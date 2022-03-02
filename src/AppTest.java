@@ -4,14 +4,20 @@ import java.util.ArrayList;
 
 class AppTest {
 
-    @Test
-    void add_team_key_test() {
+    /**
+     * Test in order to check if key String that is initialized by add_team function , is contained in the Hashmap
+     */
+    @Test void add_team_key_test() {
         String team_name_test = "man united";
         App.add_team(team_name_test);
         assertTrue(App.teams.containsKey(team_name_test));
 
     }
-    void add_team_is_empty() {
+
+    /**
+     * Test in order to check that Hashmap is not empty once key String has been initialized by add_team function
+     */
+    @Test void add_team_is_empty() {
         String team_name_test = "man united";
         App.add_team(team_name_test);
         assertFalse(App.teams.isEmpty());
@@ -132,10 +138,19 @@ class AppTest {
 
     @Test
     void score_and_save_percent() {
-    }
+        String player_name_test1 = "Ronaldo";
+        String player_name_test2 = "Neuer";
+        App.add_player("Man Utd", player_name_test1, "38", "Portugal", "Striker", "9");
+        App.add_player("Bayern Munich", player_name_test2, "36", "Germany", "Goalie", "69");
+        App.add_shot_on_goal(player_name_test1, 10);
+        App.add_goal(player_name_test1, 5);
+        App.add_shot_on_goalie(player_name_test2, 10);
+        App.add_save(player_name_test2, 8);
+        
 
+    }
     @Test
-    void mean_table() {
+    void mean_table_test() {
     }
 
     @Test
